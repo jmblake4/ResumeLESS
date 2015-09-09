@@ -1,11 +1,25 @@
+@environment: desktop; /* used for mixin guard test for .link_mixin */
 @light_blue: #005599;
 @form_gray: #666666;
-@hover_orange: #ff5522;
+@hover_orange: color("#ff5522");
 
 html {
 	color: #000000;
 	background-color: #ffffff;
 	font-size: 12px;
+}
+
+.link_mixin(@color: #ffffff; @vcolor: #ffffff; @hcolor: @hover_orange) when (@environment = desktop) {
+		text-decoration: none;
+		&:link {
+			color: @color;
+		}
+		&:visited {
+			color: @vcolor;
+		}
+		&:hover {
+			color: @hover_orange;
+		}	
 }
 
 #navbar {
@@ -14,19 +28,9 @@ html {
 	top: 0%;
 	position: fixed;
 	background-color: @light_blue;
-	color: #ffffff;
-	
+	color: #ffffff;	
 	a {
-		text-decoration: none;
-		&:link {
-			color: #ffffff;
-		}
-		&:visited {
-			color: #ffffff;
-		}
-		&:hover {
-			color: @hover_orange;
-		}
+		.link_mixin;
 	}
 	ul {
 		text-align: center;
@@ -51,10 +55,6 @@ html {
 	p {
 		text-align: center;
 	}
-}
-
-#header p {
-	text-align: center;
 }
 
 #name {
@@ -170,24 +170,8 @@ html {
 }
 
 #message_div {
-	width: 50%;
+	.input_div;
 	height: 100px;
-	display: block;
-	text-align: left;
-	margin-left: 25%;
-	margin-right: 25%;
-	background-color: #ffffff;
-	color: @form_gray;	
-}
-
-.input_div {
-	width: 50%;
-	display: block;
-	text-align: left;
-	margin-left: 25%;
-	margin-right: 25%;
-	background-color: #ffffff;
-	color: @form_gray;	
 }
 
 .btn {
